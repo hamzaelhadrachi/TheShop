@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ShopCommon" />
         <module name="ShopFrontEnd" />
+        <module name="ShopCommon" />
         <module name="shopbackend" />
+        <module name="shopcommon" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
       <module name="ShopFrontEnd" options="-parameters" />
       <module name="ShopWebParent" options="-parameters" />
       <module name="shopbackend" options="-parameters" />
+      <module name="shopcommon" options="-parameters" />
     </option>
   </component>
 </project>
