@@ -52,4 +52,9 @@ public class Role {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
