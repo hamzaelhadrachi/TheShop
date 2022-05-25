@@ -62,35 +62,8 @@
 
         <div class="container-fluid">
             <div>
-                <h1>Users Management</h1>
-                <a th:href = "@{/users/new}">Create New User</a>
-            </div>
-
-            <div>
-                <table class="table table-Bordered table-striped table-hover table-responsive-xl">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>User ID</th>
-                            <th>Photos</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Roles</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="user:${userList}">
-                            <td>[[${user.id}]]</td>
-                            <td>[[${user.photos}]]</td>
-                            <td></td>
-                            <td>[[${user.email}]]</td>
-                            <td>[[${user.firstName}]]</td>
-                            <td>[[${user.lastName}]]</td>
-                            <td>[[${user.enabled}]]</td>
-                            <td>Edit &nbsp; Delete</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h1>Error Page</h1>
+                <p>Oops! something went wrong !! (^o^)</p>
             </div>
 
             <div>
