@@ -1,6 +1,5 @@
 package com.zerotohero.admin.user;
 
-import com.zerotohero.admin.security.WebSecurityConfig;
 import com.zerotohero.entities.Role;
 import com.zerotohero.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +35,10 @@ public class UserService {
     private void encodePassword(User user){
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+    }
+
+    public boolean isEmailUnique(String email){
+        User userByEmail = userRepository.getUserByEmail(email);
+        return userByEmail == null;
     }
 }

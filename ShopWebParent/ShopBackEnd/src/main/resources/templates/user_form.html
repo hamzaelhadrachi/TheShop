@@ -66,7 +66,7 @@
             </div>
 
             <form th:action="@{/users/save}" method="post" style="max-width: 700px; margin: 0 auto"
-                th:object="${user}">
+                th:object="${user}" onsubmit="return checkEmailUniqueness(this);">
                 <div class="border border-secondary rounded p-3">
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">E-mail:</label>
@@ -117,7 +117,27 @@
                     </div>
                 </div>
             </form>
-            <div>
+
+            <div class="modal fade text-center" id="modalDialog">
+                <div class="modalDialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-titre" id="modalTitle">Warning</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <span id="modalBody"></span>
+                        </div>
+                        <div class="modal-footer" >
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
                 <p>The shop - Copyright &copy; TheShop</p>
             </div>
         </div>
@@ -129,6 +149,33 @@
                     });
                 }
             );
+
+            function_checkEmailUniqueness(form){
+                url = "[[@{/users/check_email}]]";
+                userEmail = $("#email").val();
+                csrfValue = $("input[name='_csrf']").val();
+                params = {email: userEmail, _csrf: csrfValue};
+
+                $.post(url, params, function(response) {
+                    if (response == "ok"){
+                        form.submit();
+                    }else if(response == "Duplicated"){
+                        showModalDialog("Warning","This Email is already used !");
+                    }else {
+                        showModalDialog("Error","Unknown response From Server ");
+                    }
+                }).fail(
+                function(){
+                    showModalDialog("Error","Could not connect to Server ");
+                });
+
+                return false;
+            }
+            function_showModalDialog(title, message){
+                $("modalTitle").text(title);
+                $("modalTitle").text(message);
+                $("#modalDialog").modal();
+            }
         </script>
     </body>
 </html>

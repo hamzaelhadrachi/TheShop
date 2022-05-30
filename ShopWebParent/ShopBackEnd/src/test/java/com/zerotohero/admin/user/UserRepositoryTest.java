@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
-public class UserRepositoryTest {
+class UserRepositoryTest {
 
     @Autowired
     private UserRepository repository;
@@ -26,7 +26,7 @@ public class UserRepositoryTest {
     private TestEntityManager entityManager;
 
     @Test
-    public void testCreateUserWithOneRole(){
+     void testCreateUserWithOneRole(){
 
         Role admin = entityManager.find(Role.class, 1);
 
@@ -34,8 +34,15 @@ public class UserRepositoryTest {
         createUser.addRole(admin);
         User saveUser = repository.save(createUser);
 
-        assertThat(saveUser.getId()).isGreaterThan(0);
+        assertThat(saveUser.getId()).isPositive();
 
     }
 
+    @Test
+    void testGetUserByEmail(){
+        String email = "test@mail.com";
+        User userByEmail = repository.getUserByEmail(email);
+
+        assertThat(userByEmail).isNotNull();
+    }
 }
