@@ -29,20 +29,37 @@ class UserRepositoryTest {
      void testCreateUserWithOneRole(){
 
         Role admin = entityManager.find(Role.class, 1);
+        User user = repository.getUserByEmail("test.email@mail.com");
 
-        User createUser = new User("test.email@mail.com","123", "testFirstName", "testLastName");
-        createUser.addRole(admin);
-        User saveUser = repository.save(createUser);
+        if(user == null){
+            User createUser = new User("test.email@mail.com","123", "testFirstName", "testLastName");
+            createUser.addRole(admin);
 
-        assertThat(saveUser.getId()).isPositive();
+            User saveUser = repository.save(createUser);
+            assertThat(saveUser.getId()).isPositive();
+        }
+
 
     }
 
     @Test
-    void testGetUserByEmail(){
-        String email = "test@mail.com";
-        User userByEmail = repository.getUserByEmail(email);
+    void testListAllUsers(){
+        Iterable<User> usersList = repository.findAll();
+        usersList.forEach(System.out::println);
+    }
 
-        assertThat(userByEmail).isNotNull();
+    @Test
+    void testGetUserByEmail(){
+        User user = repository.getUserByEmail("test.email@mail.com");
+        assertThat(user).isNotNull();
+    }
+
+    @Test
+    void testUpdateUserDetails(){
+        User usr = repository.findById(1).get();
+        usr.setEnabled(true);
+        usr.setEmail("new.updatedmail@gmail.com");
+
+        repository.save(usr);
     }
 }
