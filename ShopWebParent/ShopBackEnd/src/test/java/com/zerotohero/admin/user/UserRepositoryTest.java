@@ -62,4 +62,12 @@ class UserRepositoryTest {
 
         repository.save(usr);
     }
+
+    @Test
+    public void testCountById(){
+        Integer id = 1;
+        Long countById = repository.countById(id);
+
+        assertThat(countById).isNotNull().isGreaterThan(0L);
+    }
 }
