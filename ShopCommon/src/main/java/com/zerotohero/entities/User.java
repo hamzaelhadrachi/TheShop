@@ -51,4 +51,12 @@ public class User {
     public void addRole(Role role){
         this.roles.add(role);
     }
+
+    @Transient
+    public String getPhotoImagePAth(){
+        if (id == null || photos == null){
+            return "/mages/default-image.png";
+        }
+        return "/user-photo/"+ this.id+"/"+this.photos;
+    }
 }
