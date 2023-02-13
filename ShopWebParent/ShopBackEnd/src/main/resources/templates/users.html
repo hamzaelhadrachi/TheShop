@@ -95,8 +95,10 @@
                             <td>[[${user.lastName}]]</td>
                             <td>[[${user.roles}]]</td>
                             <td>
-                                <a th:if="${user.enabled == true}" class="fas fa-check-circle" style="color: green"></a>
-                                <a th:if="${user.enabled == false}" class="fas fa-check-circle"></a>
+                                <a th:if="${user.enabled == true}" class="fas fa-check-circle" style="color: green"
+                                   th:href="@{'/users/'+${user.id}+'/enabled/false'}" title="Enable User"></a>
+                                <a th:if="${user.enabled == false}" class="fas fa-circle"
+                                   th:href="@{'/users/'+${user.id}+'/enabled/true'}" title="Disable User"></a>
                             </td>
                             <td>
                                 <a class="fas fa-edit icon-blue" th:href="@{'/users/edit/' + ${user.id}}" title="Edit User"></a>
