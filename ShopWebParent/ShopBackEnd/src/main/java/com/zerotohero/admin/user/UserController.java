@@ -27,26 +27,49 @@ public class UserController {
     private UserService service;
     
     private String page;
+    private String sortField;
+    private String sortDir;
+    private String keyword;
 
-    public String getPage() {
+    private String getPage() {
 		return page;
 	}
-
-	public void setPage(String page) {
+	private void setPage(String page) {
 		this.page = page;
 	}
+    private String getSortField() {
+        return sortField;
+    }
+    private void setSortField(String sortField) {
+        this.sortField = sortField;
+    }
+    private String getSortDir() {
+        return sortDir;
+    }
+    private void setSortDir(String sortDir) {
+        this.sortDir = sortDir;
+    }
+    private String getKeyword() {
+        return keyword;
+    }
+    private void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
-	@GetMapping("/users")
+    @GetMapping("/users")
     public String listFirstPage(Model model){
-        
-        return listByPage(1, model,"email","asc");
+        setPage(String.valueOf(1));
+        return listByPage(1, model,"email","asc", null);
     }
 
     @GetMapping("/users/page/{pageNum}")
-    public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model m, @Param("sortField") String sortField, @Param("sortDir") String sortDir) {
+    public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model m, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
     	setPage(String.valueOf(pageNum));
-    	
-    	Page<User> page = service.listByPage(pageNum, sortField, sortDir);
+    	setKeyword(keyword);
+        setSortDir(sortDir);
+        setSortField(sortField);
+
+    	Page<User> page = service.listByPage(pageNum, sortField, sortDir, keyword);
     	List<User> users = page.getContent();
     	
     	long startCount = (pageNum - 1)*UserService.USERS_PER_PAGES+1;
@@ -67,7 +90,8 @@ public class UserController {
     	m.addAttribute("sortField", sortField);
     	m.addAttribute("sortDir", sortDir);
     	m.addAttribute("reversSortDir", reversSortDir);
-    	
+        m.addAttribute("keyword", keyword);
+
     	return "users";
     }
     
@@ -136,11 +160,15 @@ public class UserController {
     public String updateUserEnabledStatus(@PathVariable("id") Integer id, @PathVariable("status") boolean enabled, RedirectAttributes attributes){
         service.updateUserEnabledStatus(id,enabled);
         String page = getPage();
+        String keyword = getKeyword();
+        String sortDir = getSortDir();
+        String sortField = getSortField();
+
         String status = enabled ? "Enabled" : "Disabled";
         String message = "The User ID: "+id+" Has Been "+status;
 
         attributes.addFlashAttribute("message",message);
 
-        return "redirect:/users/page/"+page;
+        return page.equals("1") ? "redirect:/users" : "redirect:/users/page/"+page+"?sortField="+sortField+"&sortDir="+sortDir;
     }
 }
