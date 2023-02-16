@@ -36,7 +36,7 @@ public class UserController {
 		this.page = page;
 	}
 
-	@GetMapping("/users/page/1")
+	@GetMapping("/users")
     public String listFirstPage(Model model){
         
         return listByPage(1, model,"email","asc");
@@ -45,7 +45,6 @@ public class UserController {
     @GetMapping("/users/page/{pageNum}")
     public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model m, @Param("sortField") String sortField, @Param("sortDir") String sortDir) {
     	setPage(String.valueOf(pageNum));
-    	if(pageNum < 1) return "redirect:/users/page/1";
     	
     	Page<User> page = service.listByPage(pageNum, sortField, sortDir);
     	List<User> users = page.getContent();
@@ -69,10 +68,7 @@ public class UserController {
     	m.addAttribute("sortDir", sortDir);
     	m.addAttribute("reversSortDir", reversSortDir);
     	
-    	if(pageNum > totalPages) {
-    		return "redirect:/users/page/"+totalPages;
-    	}else
-    		return "users";
+    	return "users";
     }
     
     @GetMapping("/users/new")
