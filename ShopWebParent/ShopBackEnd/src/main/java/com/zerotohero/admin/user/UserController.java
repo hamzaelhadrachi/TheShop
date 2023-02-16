@@ -37,9 +37,9 @@ public class UserController {
 	}
 
 	@GetMapping("/users/page/1")
-    public String listFirstPage(Model model, @Param("sortField") String sortField, @Param("sortDir") String sortDir){
+    public String listFirstPage(Model model){
         
-        return listByPage(1, model,sortField,sortDir);
+        return listByPage(1, model,"email","asc");
     }
 
     @GetMapping("/users/page/{pageNum}")
