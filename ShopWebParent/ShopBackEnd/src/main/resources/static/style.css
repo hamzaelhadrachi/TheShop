@@ -4,3 +4,27 @@
 *.icon-red{color: red}
 *.icon-silver{color: silver}
 *.icon-blue{color: blue}
+
+.portrait {
+    height: 80px;
+    width: 30px;
+}
+
+@media screen and (max-width: 768px){
+	/* small screen*/
+	div.full-details {display: none;}
+	div.less-details {display: block;}	
+}
+
+@media screen and (min-width: 768px){
+	/* medium screen*/
+	div.full-details {display: block;}
+	div.less-details {display: none;}
+	.hideable-column {display: none;}
+}
+
+@media screen and (min-width: 992px){
+	/* big screen*/
+	.hideable-column {display: table-cell;}
+	div.less-details {display: none;}
+}
