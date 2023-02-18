@@ -10,4 +10,14 @@ public class MainController {
     public String viewHomePage(){
         return "index";
     }
+
+    @GetMapping("/error")
+    public String viewErrorPage(){
+        return "error";
+    }
+    
+    @GetMapping("/login")
+    public String viewLoginPage() {
+    	return "login";
+    }
 }

@@ -1,6 +1,5 @@
 HELP.md
 ### IntelliJ IDEA ###
-/.idea/
 *.iws
 *.iml
 *.ipr
@@ -14,4 +13,4 @@ HELP.md
 .settings
 .springBeans
 .sts4-cache
-
+.idea

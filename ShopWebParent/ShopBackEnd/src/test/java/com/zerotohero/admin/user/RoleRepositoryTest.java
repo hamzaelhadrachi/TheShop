@@ -25,7 +25,7 @@ class RoleRepositoryTest {
     RoleRepository repository;
 
     @Test
-    public void testCreateRestOfRoles(){
+    void testCreateRestOfRoles(){
 
         Role adminRole  = new Role("Admin", "Manages Every Thing");
         Role salesPersonRole  = new Role("SalesPerson", "manages ProductPrice, Customers, Shipping, Orders and Sales Reports.");
@@ -35,8 +35,7 @@ class RoleRepositoryTest {
         Iterable<Role> savedRoles = repository.saveAll(Arrays.asList(adminRole, salesPersonRole, editorRole, shipperRole, assistantRole));
 
         savedRoles.forEach(
-                role -> assertThat(role.getId()).isGreaterThan(0)
+                role -> assertThat(role.getId()).isPositive()
         );
     }
-
 }
