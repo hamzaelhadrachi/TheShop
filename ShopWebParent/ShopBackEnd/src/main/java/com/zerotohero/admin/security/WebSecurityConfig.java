@@ -50,7 +50,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.usernameParameter("email")
                 .permitAll()
                 .and()
-                .logout().permitAll();
+                .logout().permitAll()
+                .and()
+                .rememberMe()
+                .key("AbcDefGhiJklmNopQrs_1234567890")
+                .tokenValiditySeconds(7 * 24 * 60 * 60);
     }
 
 	@Override // override this method to import image

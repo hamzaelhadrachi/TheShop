@@ -28,6 +28,11 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+    public User getUserBuEmail(String email){
+        return userRepository.getUserByEmail(email);
+    }
+
     public List<User> listAll(){
         return (List<User>) userRepository.findAll(Sort.by("firstName").ascending());
     }
