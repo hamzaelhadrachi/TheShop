@@ -19,7 +19,12 @@
             </div>
 
             <form th:action="@{/login}" method="post" style="max-width: 700px; margin: 0 auto">
-              
+                <div th:if="${param.error}">
+                    <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                </div>
+                <div th:if="${param.logout}">
+                    <p class="text-warning">See you later !</p>
+                </div>
                 <div class="border border-secondary rounded p-3">
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">E-mail: </label>

@@ -17,4 +17,5 @@
         <module>ShopCommon</module>
         <module>ShopWebParent</module>
     </modules>
+
 </project>
