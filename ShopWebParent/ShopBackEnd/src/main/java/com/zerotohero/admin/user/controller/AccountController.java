@@ -1,6 +1,7 @@
-package com.zerotohero.admin.user;
+package com.zerotohero.admin.user.controller;
 
 import com.zerotohero.admin.security.ShopUserDetails;
+import com.zerotohero.admin.user.UserService;
 import com.zerotohero.admin.utils.FileUploadUtil;
 import com.zerotohero.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class AccountController {
 
         model.addAttribute("user",user);
 
-        return "account_form";
+        return "users/account_form";
     }
 
     @PostMapping("/account/update")

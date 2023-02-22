@@ -1,5 +1,6 @@
 package com.zerotohero.admin.user;
 
+import com.zerotohero.admin.customException.UserNotFoundException;
 import com.zerotohero.entities.Role;
 import com.zerotohero.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;

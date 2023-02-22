@@ -55,7 +55,7 @@ public class User {
     @Transient
     public String getPhotoImagePAth(){
         if (id == null || photos == null){
-            return "/mages/default-image.png";
+            return "/images/default-user.png";
         }
         return "/user-photo/"+ this.id+"/"+this.photos;
     }

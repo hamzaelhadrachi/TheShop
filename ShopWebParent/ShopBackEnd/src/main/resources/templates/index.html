@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head th:replace="fragments :: page_head('Administration')"/>
     <body>
         <div class="container-fluid">
             <div th:replace="navigation :: menu"></div>
             <div>
                 <h1>Control Panel</h1>
+
+                User:&nbsp;<strong><span sec:authentication="principal.fullname"></span></strong>
+                &nbsp;||&nbsp;Role:&nbsp;<strong><span sec:authentication="principal.authorities"></span></strong>
             </div>
             <div th:replace="fragments :: footer"></div>
         </div>

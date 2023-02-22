@@ -1,4 +1,4 @@
-package com.zerotohero.admin.user;
+package com.zerotohero.admin.customException;
 
 public class UserNotFoundException extends Throwable {
     public UserNotFoundException(String s) {
